@@ -81,10 +81,11 @@ namespace _01_day_HomeWork
             //Определяем переменные для рассчета индекса массы тела по условиям задачи
             float m, h, bodyIndex;
             m = userWeight;
-            h = userHeight;
+            h = userHeight / 100; //Перевод в метры
+
             // Расчет индекса массы тела по формуле
             bodyIndex = m / (h * h);
-            Console.WriteLine($"Ваш индекс массы тела составляет: ({bodyIndex})");
+            Console.WriteLine($"Ваш индекс массы тела составляет: {bodyIndex}");
             pauseProgramMsg("Нажмите любую клавишу для продолжения");
 
             //Подсчет расстояния между точками
