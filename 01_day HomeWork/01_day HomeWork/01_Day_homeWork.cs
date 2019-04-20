@@ -12,20 +12,6 @@ namespace _01_day_HomeWork
 {
     class Program
     {
-        // Метод ожидания ввода любого символа пользователем в консоли
-        static void pauseProgram()
-        {
-            Console.ReadKey();
-        }
-        // Метод ожидания ввода любого символа пользователем в консоли c сообщением пользователю c отступом строки
-        static void pauseProgramMsg(string msg)
-        {
-            Console.WriteLine();
-            Console.WriteLine(msg);
-            Console.WriteLine();
-            pauseProgram();
-        }
-
         static void Main(string[] args)
         {
 
@@ -56,16 +42,16 @@ namespace _01_day_HomeWork
             userWeight = float.Parse(Console.ReadLine());
 
             //Вывод данных анкеты используя склеивание
-            pauseProgramMsg("Нажмите клавишу для примера вывода с помощью склеивания:");
+            msgPauseProgram.Msg("Нажмите клавишу для примера вывода с помощью склеивания:");
             Console.WriteLine("Ваша анкета: " + " имя - " + userName + " фамилия - " + userSername + " возраст - " + userAge + " рост - " + userHeight + " вес - " + userWeight);
 
-            pauseProgramMsg("Нажмите клавишу для примера форматированного вывода:");
+            msgPauseProgram.Msg("Нажмите клавишу для примера форматированного вывода:");
             Console.WriteLine("Ваша акета: имя - {0}, фамилия - {1}, возраст - {2}, рост - {3:N} и вес - {4:N}", userName, userSername, userAge, userHeight, userWeight);
 
-            pauseProgramMsg("Нажмите клавишу для примера вывода со знаком $:");
+            msgPauseProgram.Msg("Нажмите клавишу для примера вывода со знаком $:");
             Console.WriteLine($"Ваша акета: имя - {userName}, фамилия - {userSername}, возраст - {userAge}, рост - {userHeight:N} и вес - {userWeight:N}");
 
-            pauseProgramMsg("Нажмите любую клавишу для продолжения");
+            msgPauseProgram.Msg("Нажмите любую клавишу для продолжения");
 
             // Рассчет индекса массы тела на основе введенных значений из анкеты
 
@@ -76,18 +62,18 @@ namespace _01_day_HomeWork
             ///h — рост в метрах.
             ///</summary>
 
-            Console.WriteLine("Из анкеты нам известен ваш рост и вес. На основе этого рассчитаем индекс массы тела");
+            Console.WriteLine(" Из анкеты нам известен ваш рост и вес. \n На основе этого рассчитаем индекс массы тела");
 
             //Определяем переменные для рассчета индекса массы тела по условиям задачи
-            float m, h, bodyIndex;
+            double m, h, bodyIndex;
             m = userWeight;
             h = userHeight / 100; //Перевод в метры
 
             // Расчет индекса массы тела по формуле
-            bodyIndex = m / (h * h);
-            Console.WriteLine($"Ваш индекс массы тела составляет: {bodyIndex}");
-            pauseProgramMsg("Нажмите любую клавишу для продолжения");
-
+            bodyIndex = Math.Truncate(m / (h * h));
+            Console.WriteLine($"Ваш индекс массы тела составляет: {bodyIndex:G}");
+            msgPauseProgram.Msg("Нажмите любую клавишу для продолжения");
+            Console.Clear();
             //Подсчет расстояния между точками
 
             ///<summary>
@@ -97,6 +83,72 @@ namespace _01_day_HomeWork
             ///б) *Выполнить предыдущее задание, оформив вычисления расстояния между точками в виде метода.
             /// </summary>
 
+            Console.WriteLine("Расчитаем расстояние между точками с координатами х1, у1 и х2, у2");
+            //Предположим что координаты нам известны
+            int x1 = 10, y1 = 10, x2 = 50, y2 = 30;
+            //Переменная для нахождения расстояния между точками
+            double r;
+            //Вычисляем результат
+            r = Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
+            Console.WriteLine($"Расстояние между точками равно {r:F2}");
+            msgPauseProgram.Msg("Рассчет методом");
+            //Реализуем тоже самое в виде метода
+            r =  dotDistance.XY(x1, y1, x2, y2);
+            Console.WriteLine($"Расстояние между точками равно {r:F2}");
+            msgPauseProgram.Msg("Нажмите любую клавишу для продолжения");
+
+            Console.Clear();
+
+           ///<summary>
+           ///Задача №4 написать программу обмена занчениями переменных
+           ///а) с использованием третьей переменной;
+           /// б) *без использования третьей переменной.
+           ///</summary>
+
+           Console.WriteLine("Программа обмена значениями 2х переменных. А и B");
+            int a = 10, b = 11;
+            int tmp;
+            Console.WriteLine($"Переменная A равна {a}, переменная B равна {b}");
+            tmp = a;
+            a = b;
+            b = tmp;
+            Console.WriteLine($"Поменяли и теперь переменная A равна {a}, переменная B равна {b}");
+            msgPauseProgram.Msg("Поменяем без использования третьей переменной. Нажмите любую клавишу");
+            a = 10;
+            b = 11;
+            Console.WriteLine($"Переменная A равна {a}, переменная B равна {b}");
+             a = a + b;
+            b = b - a;
+            b = -b;
+            a = a - b;
+            Console.WriteLine($"Поменяли и теперь переменная A равна {a}, переменная B равна {b}");
+            msgPauseProgram.Msg("Нажмите любую клавишу для продолжения");
+            Console.Clear();
+
+            ///<summary>
+            ///Задача №5 Программа выводит на экран имя, фамилию и город проживания
+            ///а) В центре экрана;
+            /// б)С использованием метода.
+            ///</summary>
+
+            var cityLive = "Иркутск";
+
+            Console.Write("{0} {1} {2}", userName, userSername, cityLive);
+            msgPauseProgram.Msg("Нажмите любую клавишу для вывода информации по центру экрана ");
+            Console.Clear();
+
+            int origWidth = Console.WindowWidth; //Получаем ширину окна
+            int origHeight = Console.WindowHeight;//Получаем высоту окна
+
+            Console.SetCursorPosition((origWidth / 2) - userName.Length, origHeight / 2); //Отнимаю киличество букв в имени  чтобы поставить ближе к центру
+
+            Console.Write("{0} {1} {2} \n", userName, userSername, cityLive);
+            msgPauseProgram.Msg("Нажмите любую клавишу для продолжения. \n \n Вывод с помошью метода");
+            Console.Clear();
+                       
+            string addString = userName + " " + userSername + " " + cityLive;
+            CursorPos.Print(addString, (origWidth / 2) - userName.Length, origHeight / 2);
+            msgPauseProgram.Msg("Нажмите любую клавишу для продолжения.");
         }
     }
 }
